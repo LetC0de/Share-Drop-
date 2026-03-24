@@ -1,12 +1,29 @@
 const http = require("http");
 const WebSocket = require("ws");
 
+const ALLOWED_ORIGIN = "https://share-drop-rho.vercel.app";
+
 // ── DEPLOY FEATURE: use http server so Render can inject PORT via env ── START
 const PORT = process.env.PORT || 3000;
-const server = http.createServer();
+const server = http.createServer((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.writeHead(200);
+  res.end();
+});
 
 // ── NETWORK FEATURE: attach WebSocket to http server, works on all interfaces ── START
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({
+  server,
+  verifyClient: ({ origin }, cb) => {
+    if (!origin || origin === ALLOWED_ORIGIN) {
+      cb(true);
+    } else {
+      cb(false, 403, "Forbidden");
+    }
+  }
+});
 // ── NETWORK FEATURE: attach WebSocket to http server ── END
 
 server.listen(PORT, "0.0.0.0", () => {

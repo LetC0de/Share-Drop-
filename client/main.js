@@ -13,10 +13,7 @@ const deviceName = generateDeviceName();
 document.getElementById("deviceName").innerText = deviceName;
 document.getElementById("myAvatarLetter").innerText = deviceName.charAt(0);
 
-// ── NETWORK FEATURE: dynamic WebSocket URL so any device on same WiFi can connect ── START
-const WS_PROTOCOL = location.protocol === "https:" ? "wss:" : "ws:";
-const socket = new WebSocket(`${WS_PROTOCOL}//${location.hostname}:3000`);
-// ── NETWORK FEATURE: dynamic WebSocket URL ── END
+const socket = new WebSocket("wss://share-drop-7ifh.onrender.com");
 
 // State
 let myId = null;
