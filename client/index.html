@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShareDrop</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── CONNECTION REQUEST MODAL ── -->
+  <div id="requestModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-icon">📲</div>
+      <h3>Connection Request</h3>
+      <p id="requestText">Someone wants to connect</p>
+      <div class="modal-btns">
+        <button id="rejectBtn" class="btn btn-reject">Decline</button>
+        <button id="acceptBtn" class="btn btn-accept">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">ShareDrop</span>
+      </div>
+      <div class="header-status">
+        <span id="connDot" class="status-dot"></span>
+        <span id="connLabel" class="status-label">Not connected</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ── LEFT PANEL ── -->
+    <aside class="panel panel-left">
+
+      <!-- Your device card -->
+      <div class="card device-card">
+        <div class="device-avatar" id="myAvatar">
+          <span id="myAvatarLetter">?</span>
+        </div>
+        <div class="device-info">
+          <p class="device-label">Your Device</p>
+          <p class="device-name" id="deviceName">Loading...</p>
+        </div>
+      </div>
+
+      <!-- Status bar -->
+      <div class="card status-card">
+        <p id="statusText" class="status-text">Connecting to server...</p>
+      </div>
+
+      <!-- Nearby devices -->
+      <div class="card nearby-card">
+        <div class="nearby-header">
+          <span class="section-title">Nearby Devices</span>
+          <span class="nearby-hint">tap to connect</span>
+        </div>
+        <div id="devicesList" class="devices-list">
+          <div class="empty-state">
+            <div class="radar-ring"></div>
+            <p>Scanning for devices...</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── RIGHT PANEL ── -->
+    <section class="panel panel-right">
+
+      <!-- ── FILE TRANSFER FEATURE: file send UI ── START -->
+      <div class="card file-card">
+        <div class="file-card-header">
+          <span class="section-title">📁 Send File</span>
+        </div>
+
+        <label class="drop-zone" id="dropArea">
+          <input type="file" id="fileInput" hidden />
+          <div class="drop-icon">☁️</div>
+          <p class="drop-title">Drop file here</p>
+          <p class="drop-sub">or <span class="drop-link">browse to upload</span></p>
+        </label>
+
+        <div id="progressWrap" class="progress-wrap hidden">
+          <div class="progress-meta">
+            <span id="progressFileName" class="progress-filename"></span>
+            <span id="progressLabel" class="progress-pct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="progressBar" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+      <!-- ── FILE TRANSFER FEATURE: file send UI ── END -->
+
+      <!-- ── CHAT FEATURE: chat UI card ── START -->
+      <div class="card chat-card">
+        <div class="chat-header">
+          <span class="section-title">💬 Chat</span>
+        </div>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" class="chat-input" placeholder="Type a message..." autocomplete="off" />
+          <button id="chatSendBtn" class="btn btn-send">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- ── CHAT FEATURE: chat UI card ── END -->
+
+    </section>
+
+  </main>
+
+  <script src="webrtc.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
